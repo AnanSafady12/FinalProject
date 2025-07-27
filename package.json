@@ -1,0 +1,24 @@
+{
+  "name": "finalproject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnanSafady12/FinalProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnanSafady12/FinalProject/issues"
+  },
+  "homepage": "https://github.com/AnanSafady12/FinalProject#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "fs-extra": "^11.3.0"
+  }
+}
