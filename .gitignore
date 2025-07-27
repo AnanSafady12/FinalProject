@@ -138,4 +138,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 Data/users.json
+package.json
+package-lock.json
 
