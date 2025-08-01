@@ -7,6 +7,11 @@
  */
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    // ✅ Session check
+    const session = await checkSession();
+    if (!session) return;
+
     // ✅ Handle Sign Out button
     document.getElementById("signOutBtn")?.addEventListener("click", async () => {
         try {
@@ -29,6 +34,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!session) return;
         }
     });
+
+    // 🔧 Session utility
+    async function checkSession() {
+        try {
+            const res = await fetch("/api/session");
+            if (!res.ok) throw new Error();
+            return await res.json();
+        } catch {
+            window.location.replace("/");
+            return null;
+        }
+    }
 
     // 📦 Reference to leaderboard table body
     const tableBody = document.getElementById("leaderboardBody");
