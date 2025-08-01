@@ -32,8 +32,8 @@ app.use(session({
 // ✅ Built-in middleware to parse JSON bodies in incoming requests
 app.use(express.json());
 
-// ✅ Serve static files (HTML, CSS, JS, images) from the "Client" folder
-app.use(express.static(path.join(__dirname, "Client")));
+// ✅ Serve static files (HTML, CSS, JS, images) from the "client" folder
+app.use(express.static(path.join(__dirname, "client")));
 
 // ✅ Custom middleware: protects routes by checking if the user is logged in
 function requireLogin(req, res, next) {
@@ -49,57 +49,57 @@ function requireLogin(req, res, next) {
 // ✅ Root page – Introduction or redirect to /home if already logged in
 app.get("/", (req, res) => {
   if (req.session.userId) return res.redirect("/home"); // If user is logged in, go to home
-  res.sendFile(path.join(__dirname, "Client", "Introduction.html")); // Otherwise show intro
+  res.sendFile(path.join(__dirname, "client", "Introduction.html")); // Otherwise show intro
 });
 
 // ✅ Login page (public)
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "LogInPage.html"));
+  res.sendFile(path.join(__dirname, "client", "LogInPage.html"));
 });
 
 // ✅ Register page (public)
 app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "RegisterPage.html"));
+  res.sendFile(path.join(__dirname, "client", "RegisterPage.html"));
 });
 
 // ✅ Home page – protected, must be logged in
 app.get("/home", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "HomePage.html"));
+  res.sendFile(path.join(__dirname, "client", "HomePage.html"));
 });
 
 // ✅ Favorites page – protected
 app.get("/favorites", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "favorites.html"));
+  res.sendFile(path.join(__dirname, "client", "favorites.html"));
 });
 
 // ✅ Popular Pokémons page – protected
 app.get("/popular_pokemons", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "popular_pokemons.html"));
+  res.sendFile(path.join(__dirname, "client", "popular_pokemons.html"));
 });
 
 // ✅ Individual Pokémon details – protected
 app.get("/pokemon/:id", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client", "PokemonDetails.html"));
+  res.sendFile(path.join(__dirname, "client", "PokemonDetails.html"));
 });
 
 // ✅ Arena: VS Bot – protected
 app.get("/arena/vs-bot", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client/arena", "vs-bot.html"));
+  res.sendFile(path.join(__dirname, "client/arena", "vs-bot.html"));
 });
 
 // ✅ Arena: VS Human – protected
 app.get("/arena/vs-human", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client/arena", "vs-human.html"));
+  res.sendFile(path.join(__dirname, "client/arena", "vs-human.html"));
 });
 
 // ✅ Arena: Leaderboard – protected
 app.get("/arena/leaderboard", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client/arena", "LeaderBoard.html"));
+  res.sendFile(path.join(__dirname, "client/arena", "LeaderBoard.html"));
 });
 
 // ✅ Arena: Fights History – protected
 app.get("/arena/fight_history", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "Client/arena", "FightsHistory.html"));
+  res.sendFile(path.join(__dirname, "client/arena", "FightsHistory.html"));
 });
 
 
