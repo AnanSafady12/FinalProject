@@ -69,7 +69,7 @@ app.get("/home", requireLogin, (req, res) => {
 
 // ✅ Favorites page – protected
 app.get("/favorites", requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "favorites.html"));
+  res.sendFile(path.join(__dirname, "client", "Favorites.html"));
 });
 
 // ✅ Popular Pokémons page – protected
