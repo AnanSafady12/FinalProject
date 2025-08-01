@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const session = await checkSession();
     if (!session) return;
+
     const currentUserId = session.userId;
 
     let currentUserPokemon = null;
