@@ -11,80 +11,90 @@
  * - Sign out functionality
  */
 
+/**
+ * 🔥 Favorites.js — Client-Side Logic for Favorites Page
+ */
+
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     // ✅ Session check
     const session = await checkSession();
     if (!session) return;
 
+    const userId = session.userId;
+    const container = document.getElementById("favoritesList");
+    const sortDropdown = document.getElementById("sortSelect");
+    const downloadBtn = document.getElementById("downloadBtn");
 
-    // ✅ Sign Out Handler — Logs user out and redirects to homepage
+    let Favorites = [];
+
+    // ✅ Sign Out Handler
     document.getElementById("signOutBtn")?.addEventListener("click", async () => {
         try {
-            const res = await fetch("/api/logout", { method: "POST" }); // Call logout API
-            if (res.ok) window.location.replace("/"); // Redirect if successful
-            else alert("Logout failed"); // Show error if not successful
+            const res = await fetch("/api/logout", { method: "POST" });
+            if (res.ok) window.location.replace("/");
+            else alert("Logout failed");
         } catch (err) {
             console.error("Logout error:", err);
             alert("Logout error. Try again.");
         }
     });
 
-    // 🔁 Handle back/forward browser navigation (re-check session)
+    // 🔁 Handle back/forward browser navigation
     window.addEventListener("pageshow", async (event) => {
         if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-            const session = await checkSession(); // Revalidate session
-            if (!session) return; // If session invalid, redirect happens in checkSession
+            const session = await checkSession();
+            if (!session) return;
         }
     });
 
-    // ✅ Main logic runs after page loads
-    document.addEventListener("DOMContentLoaded", async () => {
-        const session = await checkSession(); // 🔐 Check user session
-        if (!session) return; // Redirect handled inside checkSession
 
-        const userId = session.userId; // Extract userId from session
-        const container = document.getElementById("favoritesList"); // Container for Pokémon cards
-        const sortDropdown = document.getElementById("sortSelect"); // Sorting dropdown
-        const downloadBtn = document.getElementById("downloadBtn"); // CSV download button
+    // 🔐 Utility function: check if session is valid
+    async function checkSession() {
+        try {
+            const res = await fetch("/api/session");
+            if (!res.ok) throw new Error();
+            return await res.json();
+        } catch (err) {
+            window.location.replace("/");
+            return null;
+        }
+    }
 
-        let Favorites = []; // Store user's favorite Pokémon list
 
-        // 📥 Load user's favorite Pokémon from backend
-        async function loadFavorites() {
-            try {
-                const res = await fetch(`/users/${userId}/favorites?enrich=false`); // Call favorites API
-                if (!res.ok) throw new Error("Could not load Favorites");
-                Favorites = await res.json(); // Save result to memory
-                renderFavorites(); // Render on screen
-            } catch (err) {
-                console.error("❌ Error loading favorites:", err);
-                container.innerHTML = "<p class='text-warning'>⚠️ Failed to load Favorites.</p>";
-            }
+    // 📥 Load user's favorite Pokémon
+    async function loadFavorites() {
+        try {
+            const res = await fetch(`/users/${userId}/favorites?enrich=false`);
+            if (!res.ok) throw new Error("Could not load Favorites");
+            Favorites = await res.json();
+            renderFavorites();
+        } catch (err) {
+            console.error("❌ Error loading favorites:", err);
+            container.innerHTML = "<p class='text-warning'>⚠️ Failed to load Favorites.</p>";
+        }
+    }
+
+    // 🧱 Render Pokémon cards
+    function renderFavorites() {
+        container.innerHTML = "";
+
+        if (Favorites.length === 0) {
+            container.innerHTML = "<p>No favorite Pokémon yet!</p>";
+            return;
         }
 
-        // 🧱 Render Pokémon cards on page
-        function renderFavorites() {
-            container.innerHTML = ""; // Clear container
+        const sortBy = sortDropdown.value;
+        Favorites.sort((a, b) =>
+            sortBy === "name" ? a.name.localeCompare(b.name) : a.id - b.id
+        );
 
-            if (Favorites.length === 0) {
-                container.innerHTML = "<p>No favorite Pokémon yet!</p>"; // Message for empty list
-                return;
-            }
+        Favorites.forEach(pokemon => {
+            const card = document.createElement("div");
+            card.className = "pokemon-card";
 
-            const sortBy = sortDropdown.value; // Get selected sort option
-            Favorites.sort((a, b) =>
-                sortBy === "name"
-                    ? a.name.localeCompare(b.name) // Sort alphabetically
-                    : a.id - b.id // Sort by ID
-            );
-
-            // Create a card for each Pokémon
-            Favorites.forEach(pokemon => {
-                const card = document.createElement("div");
-                card.className = "pokemon-card"; // Set card class
-
-                // 🖼️ Card HTML content
-                card.innerHTML = `
+            card.innerHTML = `
                 <div class="pokemon-info">
                     <img src="${pokemon.image}" alt="${pokemon.name}">
                     <h2>${pokemon.name}</h2>
@@ -95,53 +105,40 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <button class="remove-btn" data-id="${pokemon.id}">❤️ Remove</button>
             `;
 
-                // 🖱️ Add redirect to Pokémon details page on card click
-                card.querySelector(".pokemon-info").addEventListener("click", () => {
-                    window.location.href = `/pokemon/${pokemon.id}`;
-                });
-
-                container.appendChild(card); // Add card to container
+            card.querySelector(".pokemon-info").addEventListener("click", () => {
+                window.location.href = `/pokemon/${pokemon.id}`;
             });
-        }
 
-        // ❌ Handle removal of a Pokémon from favorites
-        container.addEventListener("click", async (e) => {
-            if (e.target.classList.contains("remove-btn")) {
-                const pokemonId = e.target.dataset.id; // Get clicked Pokémon ID
-                try {
-                    const res = await fetch(`/users/${userId}/favorites/${pokemonId}`, {
-                        method: "DELETE"
-                    });
-                    if (!res.ok) throw new Error();
-                    Favorites = Favorites.filter(p => p.id != pokemonId); // Remove from memory
-                    renderFavorites(); // Re-render updated list
-                } catch {
-                    alert("Failed to remove favorite.");
-                }
-            }
+            container.appendChild(card);
         });
+    }
 
-        // 🔁 Re-render list when sorting option changes
-        sortDropdown.addEventListener("change", renderFavorites);
-
-        // ⬇️ Download favorites as CSV
-        downloadBtn.addEventListener("click", () => {
-            window.location.href = `/users/${userId}/favorites/download`;
-        });
-
-        // 🔐 Utility function: check if session is valid
-        async function checkSession() {
+    // ❌ Remove Pokémon from favorites
+    container.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("remove-btn")) {
+            const pokemonId = e.target.dataset.id;
             try {
-                const res = await fetch("/api/session"); // Ask server if session exists
+                const res = await fetch(`/users/${userId}/favorites/${pokemonId}`, {
+                    method: "DELETE"
+                });
                 if (!res.ok) throw new Error();
-                return await res.json(); // Return session info (userId, name)
-            } catch (err) {
-                window.location.replace("/"); // Redirect to intro if no session
-                return null;
+                Favorites = Favorites.filter(p => p.id != pokemonId);
+                renderFavorites();
+            } catch {
+                alert("Failed to remove favorite.");
             }
         }
-
-        // 🚀 Initial load of favorites when page opens
-        loadFavorites();
     });
+
+    // 🔁 Sort favorites when dropdown changes
+    sortDropdown.addEventListener("change", renderFavorites);
+
+    // ⬇️ Download favorites as CSV
+    downloadBtn.addEventListener("click", () => {
+        window.location.href = `/users/${userId}/favorites/download`;
+    });
+
+    // 🚀 Load favorites on page load
+    loadFavorites();
 });
+
