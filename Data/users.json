@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "id": 1754011563083,
+    "firstName": "AnanFarhat",
+    "email": "Anan1@gmail.com",
+    "password": "$2b$10$N6VWokOBDzsjAtX0T9SsB.izHeojhM9Sijv8gP7rTuGv28BMcmXOS",
+    "avatar": "https://api.dicebear.com/9.x/bottts/png?seed=AnanFarhat",
+    "favorites": [
+      {
+        "id": 59,
+        "name": "arcanine",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png",
+        "types": [
+          "fire"
+        ],
+        "abilities": [
+          "intimidate",
+          "flash-fire",
+          "justified"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "pikachu",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+        "types": [
+          "electric"
+        ],
+        "abilities": [
+          "static",
+          "lightning-rod"
+        ]
+      },
+      {
+        "id": 12,
+        "name": "butterfree",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+        "types": [
+          "bug",
+          "flying"
+        ],
+        "abilities": [
+          "compound-eyes",
+          "tinted-lens"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "bulbasaur",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        "types": [
+          "grass",
+          "poison"
+        ],
+        "abilities": [
+          "overgrow",
+          "chlorophyll"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "charizard",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+        "types": [
+          "fire",
+          "flying"
+        ],
+        "abilities": [
+          "blaze",
+          "solar-power"
+        ]
+      }
+    ],
+    "score": {
+      "bot": 0,
+      "human": 0,
+      "total": 0
+    },
+    "history": [],
+    "createdAt": "2025-08-01T01:26:03.083Z"
+  }
+]

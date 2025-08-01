@@ -6,6 +6,7 @@ const fs = require("fs-extra"); // File system module with promise support and e
 const path = require("path"); // Utility for handling and transforming file paths
 const axios = require("axios"); // HTTP client for making API requests (e.g., to PokéAPI)
 const bcrypt = require("bcrypt"); // Library for hashing and comparing passwords securely
+const { Parser } = require("json2csv"); // CSV parser for converting JSON data to CSV format
 
 // ✅ Predefined list of popular Pokémon IDs (used for Popular Pokémons page)
 const POPULAR_IDS = [1, 6, 7, 9, 12, 25, 59, 94, 132, 133, 134, 143, 149, 150, 151, 493];
@@ -1346,6 +1347,54 @@ app.get("/api/leaderboard", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch leaderboard" });
   }
 });
+
+
+
+
+
+
+
+app.get("/users/:userId/favorites/download", requireLogin, async (req, res) => {
+  const userId = String(req.params.userId);
+
+  try {
+    const users = await fs.readJson(USERS_FILE);
+    const user = users.find(u => String(u.id) === userId);
+
+    console.log("📥 Requested download for userId:", userId);
+    console.log("🔍 Matched user:", user);
+
+    if (!user) {
+      return res.status(404).send("User not found.");
+    }
+
+    if (!Array.isArray(user.favorites) || user.favorites.length === 0) {
+      return res.status(404).send("No favorites to download.");
+    }
+
+    const favorites = user.favorites.map(p => ({
+      id: p.id,
+      name: p.name,
+      image: p.image || "",
+      types: Array.isArray(p.types) ? p.types.join("/") : "",
+      abilities: Array.isArray(p.abilities) ? p.abilities.join("/") : ""
+    }));
+
+    const fields = ["id", "name", "image", "types", "abilities"];
+    const parser = new Parser({ fields });
+    const csv = parser.parse(favorites);
+
+    res.header("Content-Type", "text/csv");
+    res.attachment("favorites.csv");
+    res.send(csv);
+  } catch (err) {
+    console.error("❌ CSV download error:", err);
+    res.status(500).send("Failed to generate CSV.");
+  }
+});
+
+
+
 
 
 
