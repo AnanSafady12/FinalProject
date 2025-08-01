@@ -3,21 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnanSafady12/FinalProject.git"
   },
-  "author": "",
+  "author": "ANAN SAFADY, ANAN FARHAT",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AnanSafady12/FinalProject/issues"
   },
   "homepage": "https://github.com/AnanSafady12/FinalProject#readme",
-  "description": "",
+  "description": "This project allows users to search for Pokémon, add favorites, and battle others in an interactive environment. Built using Node.js and Express.",
   "dependencies": {
-    "@multiavatar/multiavatar": "^1.0.7",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "express": "^5.1.0",

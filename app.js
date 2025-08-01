@@ -14,7 +14,7 @@ const POPULAR_IDS = [1, 6, 7, 9, 12, 25, 59, 94, 132, 133, 134, 143, 149, 150, 1
 const app = express();
 
 // ✅ Define the port number for the server to listen on
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // ✅ Define the path to the JSON file that stores all user data
 const USERS_FILE = path.join(__dirname, "Data", "users.json");
