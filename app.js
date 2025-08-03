@@ -909,11 +909,6 @@ async function handleBattle(playerId, playerPokemon, opponentPokemon, opponentTy
 
 
 
-
-
-
-
-
 /**
  * ✅ Route: GET /users/:userId/favorites
  * --------------------------------------
@@ -991,7 +986,7 @@ app.get("/users/:userId/favorites", requireLogin, async (req, res) => {
 
 
 
-//Get the popular Pokémon list
+
 /**
  * ✅ Route: GET /api/popular-pokemons
  * -----------------------------------
