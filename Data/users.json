@@ -1,22 +1,89 @@
 [
   {
-    "id": 1754011563083,
-    "firstName": "AnanFarhat",
-    "email": "Anan1@gmail.com",
-    "password": "$2b$10$N6VWokOBDzsjAtX0T9SsB.izHeojhM9Sijv8gP7rTuGv28BMcmXOS",
-    "avatar": "https://api.dicebear.com/9.x/bottts/png?seed=AnanFarhat",
+    "id": 1754069303955,
+    "firstName": "AnanSafady",
+    "email": "anansafady73@gmail.com",
+    "password": "$2b$10$DhQL8YdicmMfKznbxV6ePOYFtrZFuWjPH8cmZCjct2PzGubao0fsK",
+    "avatar": "https://api.dicebear.com/9.x/bottts/png?seed=AnanSafady",
     "favorites": [
       {
-        "id": 59,
-        "name": "arcanine",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png",
+        "id": 54,
+        "name": "psyduck",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
         "types": [
-          "fire"
+          "water"
         ],
         "abilities": [
-          "intimidate",
-          "flash-fire",
-          "justified"
+          "damp",
+          "cloud-nine",
+          "swift-swim"
+        ]
+      },
+      {
+        "id": 61,
+        "name": "poliwhirl",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png",
+        "types": [
+          "water"
+        ],
+        "abilities": [
+          "water-absorb",
+          "damp",
+          "swift-swim"
+        ]
+      },
+      {
+        "id": 60,
+        "name": "poliwag",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
+        "types": [
+          "water"
+        ],
+        "abilities": [
+          "water-absorb",
+          "damp",
+          "swift-swim"
+        ]
+      },
+      {
+        "id": 55,
+        "name": "golduck",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
+        "types": [
+          "water"
+        ],
+        "abilities": [
+          "damp",
+          "cloud-nine",
+          "swift-swim"
+        ]
+      },
+      {
+        "id": 72,
+        "name": "tentacool",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/72.png",
+        "types": [
+          "water",
+          "poison"
+        ],
+        "abilities": [
+          "clear-body",
+          "liquid-ooze",
+          "rain-dish"
+        ]
+      },
+      {
+        "id": 73,
+        "name": "tentacruel",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png",
+        "types": [
+          "water",
+          "poison"
+        ],
+        "abilities": [
+          "clear-body",
+          "liquid-ooze",
+          "rain-dish"
         ]
       },
       {
@@ -32,35 +99,164 @@
         ]
       },
       {
-        "id": 12,
-        "name": "butterfree",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+        "id": 493,
+        "name": "arceus",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png",
         "types": [
-          "bug",
-          "flying"
+          "normal"
         ],
         "abilities": [
-          "compound-eyes",
-          "tinted-lens"
+          "multitype"
         ]
       },
       {
-        "id": 1,
-        "name": "bulbasaur",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        "id": 9,
+        "name": "blastoise",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
         "types": [
-          "grass",
-          "poison"
+          "water"
         ],
         "abilities": [
-          "overgrow",
-          "chlorophyll"
+          "torrent",
+          "rain-dish"
+        ]
+      }
+    ],
+    "score": {
+      "bot": 13,
+      "human": 6,
+      "total": 19
+    },
+    "history": [
+      {
+        "date": "2025-08-02",
+        "opponent": "human",
+        "playerPokemon": {
+          "id": 61,
+          "name": "poliwhirl"
+        },
+        "opponentPokemon": {
+          "id": 6,
+          "name": "charizard"
+        },
+        "result": "lose"
+      },
+      {
+        "date": "2025-08-02",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 72,
+          "name": "tentacool"
+        },
+        "opponentPokemon": {
+          "id": 110,
+          "name": "weezing"
+        },
+        "result": "lose"
+      },
+      {
+        "date": "2025-08-03",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 73,
+          "name": "tentacruel"
+        },
+        "opponentPokemon": {
+          "id": 19,
+          "name": "rattata"
+        },
+        "result": "win"
+      },
+      {
+        "date": "2025-08-03",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 25,
+          "name": "pikachu"
+        },
+        "opponentPokemon": {
+          "id": 118,
+          "name": "goldeen"
+        },
+        "result": "lose"
+      },
+      {
+        "date": "2025-08-03",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 60,
+          "name": "poliwag"
+        },
+        "opponentPokemon": {
+          "id": 16,
+          "name": "pidgey"
+        },
+        "result": "win"
+      },
+      {
+        "date": "2025-08-03",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 9,
+          "name": "blastoise"
+        },
+        "opponentPokemon": {
+          "id": 9,
+          "name": "blastoise"
+        },
+        "result": "tie"
+      },
+      {
+        "date": "2025-08-03",
+        "opponent": "bot",
+        "playerPokemon": {
+          "id": 72,
+          "name": "tentacool"
+        },
+        "opponentPokemon": {
+          "id": 4,
+          "name": "charmander"
+        },
+        "result": "lose"
+      }
+    ],
+    "createdAt": "2025-08-01T17:28:23.955Z"
+  },
+  {
+    "id": 1754069358119,
+    "firstName": "AnanFarhat",
+    "email": "ananfarhat73@gmail.com",
+    "password": "$2b$10$847m8AfTclzj2r74hRCngOCHPmaAA2BENyQursV3CFSbes17Qrk8K",
+    "avatar": "https://api.dicebear.com/9.x/bottts/png?seed=AnanFarhat",
+    "favorites": [
+      {
+        "id": 4,
+        "name": "charmander",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+        "types": [
+          "fire"
+        ],
+        "abilities": [
+          "blaze",
+          "solar-power"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "charmeleon",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+        "types": [
+          "fire"
+        ],
+        "abilities": [
+          "blaze",
+          "solar-power"
         ]
       },
       {
         "id": 6,
         "name": "charizard",
-        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
         "types": [
           "fire",
           "flying"
@@ -73,10 +269,24 @@
     ],
     "score": {
       "bot": 0,
-      "human": 0,
-      "total": 0
+      "human": 3,
+      "total": 3
     },
-    "history": [],
-    "createdAt": "2025-08-01T01:26:03.083Z"
+    "history": [
+      {
+        "date": "2025-08-01",
+        "opponent": "human",
+        "playerPokemon": {
+          "id": 6,
+          "name": "charizard"
+        },
+        "opponentPokemon": {
+          "id": 60,
+          "name": "poliwag"
+        },
+        "result": "win"
+      }
+    ],
+    "createdAt": "2025-08-01T17:29:18.119Z"
   }
 ]

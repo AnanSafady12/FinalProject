@@ -106,15 +106,6 @@ app.get("/arena/fight_history", requireLogin, (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
 /**
  * @route   GET /api/pokemon/random
  * @access  Protected (requires login)
@@ -175,14 +166,6 @@ app.get("/api/pokemon/random", requireLogin, async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 /**
  * @route   GET /api/projectinfo
  * @access  Public
@@ -215,15 +198,6 @@ app.get("/api/projectinfo", async (req, res) => {
     res.status(500).json({ error: "Could not load project info" });
   }
 });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -328,21 +302,6 @@ app.post("/register", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @route   GET /api/avatar
  * @access  Private (requires user to be logged in)
@@ -388,10 +347,6 @@ app.get("/api/avatar", async (req, res) => {
     res.status(500).json({ error: "Failed to load avatar" });
   }
 });
-
-
-
-
 
 
 
@@ -457,8 +412,6 @@ app.post("/login", async (req, res) => {
 
 
 
-
-
 /**
  * @route   POST /api/logout
  * @access  Private (requires existing session)
@@ -495,8 +448,6 @@ app.post("/api/logout", (req, res) => {
     res.json({ success: true });
   });
 });
-
-
 
 
 
@@ -570,16 +521,6 @@ app.get("/api/online-users", async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /**
  * @route   GET /api/session
  * @access  Private (session required)
@@ -619,9 +560,6 @@ app.get("/api/session", requireLogin, async (req, res) => {
     avatar: user.avatar // 🖼️ Include avatar for client display
   });
 });
-
-
-
 
 
 
@@ -721,9 +659,6 @@ app.get("/api/search", requireLogin, async (req, res) => {
 
 
 
-
-
-
 /**
  * @route   GET /api/pokemon/:id
  * @access  Private (requires login)
@@ -785,9 +720,6 @@ app.get("/api/pokemon/:id", requireLogin, async (req, res) => {
 
 
 
-
-
-
 /**
  * ✅ Function: hasReachedDailyFightLimit(user)
  * ---------------------------------------------
@@ -814,18 +746,6 @@ function hasReachedDailyFightLimit(user) {
   // ❌ Limit is 5 fights per day
   return todayFights.length >= 5;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -892,21 +812,6 @@ app.post("/api/battle/vs", requireLogin, async (req, res) => {
     res.status(500).json({ error: "Server error during battle" });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1085,6 +990,7 @@ app.get("/users/:userId/favorites", requireLogin, async (req, res) => {
 
 
 
+
 //Get the popular Pokémon list
 /**
  * ✅ Route: GET /api/popular-pokemons
@@ -1137,8 +1043,6 @@ app.get("/api/popular-pokemons", requireLogin, async (req, res) => {
     res.status(500).json({ error: "Failed to fetch popular Pokémons" });
   }
 });
-
-
 
 
 
@@ -1203,7 +1107,6 @@ app.post("/users/:userId/favorites", requireLogin, async (req, res) => {
 
 
 
-
 /**
  * ✅ Route: DELETE /users/:userId/favorites/:pokemonId
  * ----------------------------------------------------
@@ -1248,9 +1151,6 @@ app.delete("/users/:userId/favorites/:pokemonId", requireLogin, async (req, res)
 
 
 
-
-
-
 /**
  * ✅ Route: GET /api/history
  * --------------------------
@@ -1288,9 +1188,6 @@ app.get("/api/history", requireLogin, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
-
 
 
 
@@ -1351,8 +1248,31 @@ app.get("/api/leaderboard", async (req, res) => {
 
 
 
-
-
+/**
+ * ✅ Route: GET /users/:userId/favorites/download
+ * -----------------------------------------------
+ * @desc   Generates and downloads the user's favorites list as a CSV file.
+ *
+ * @access Private (requires login session)
+ *
+ * ✅ What it receives:
+ *   - URL parameter: userId (String) → The ID of the user requesting the download.
+ *
+ * ✅ What it does:
+ *   - Loads all users from users.json.
+ *   - Finds the user matching the given userId.
+ *   - Checks if the user exists and has favorite Pokémon.
+ *   - Formats the favorites list into CSV format:
+ *     - Includes fields: id, name, image, types, abilities.
+ *     - Joins arrays (types/abilities) into single strings.
+ *   - Sends the CSV file as a downloadable attachment.
+ *
+ * ✅ Returns:
+ *   - CSV file named "favorites.csv" containing the user's favorites.
+ *   - If user not found → 404 "User not found."
+ *   - If no favorites → 404 "No favorites to download."
+ *   - On error → 500 "Failed to generate CSV."
+ */
 
 app.get("/users/:userId/favorites/download", requireLogin, async (req, res) => {
   const userId = String(req.params.userId);
@@ -1392,8 +1312,6 @@ app.get("/users/:userId/favorites/download", requireLogin, async (req, res) => {
     res.status(500).send("Failed to generate CSV.");
   }
 });
-
-
 
 
 
